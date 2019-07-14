@@ -15,6 +15,7 @@ class CreateTaskViewController: UIViewController {
     // Outlet for the Important Switch.
     @IBOutlet weak var importantSwitch: UISwitch!
     
+    // Connects this view controller to the main view controller and gives it the variable previousVC
     var previousVC = ViewController()
     
     override func viewDidLoad() {
@@ -34,7 +35,6 @@ class CreateTaskViewController: UIViewController {
         previousVC.tasks.append(task)
         // Reloads the table data source and delegate with the new information.
         previousVC.tableView.reloadData()
-        
         // Allows for returning to the main View Controller after adding a task.
         navigationController!.popViewController(animated: true)
     }

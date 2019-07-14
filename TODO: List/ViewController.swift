@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Creates the empty array tasks of type Task.
     var tasks : [Task] = []
+    // Allows us to use the index to remove a task in the CompleteTaskViewController.
+    var selectedIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    // This function allows for functionality when a row is selected allowing for segue and for the app to be able to delete a task if it is completed.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // This variable is saved to be given to CompleteTaskViewController.
+        selectedIndex = indexPath.row
+        
+        // Sends "Task Data" so that the proper task is segued too.
+        let task = tasks[indexPath.row]
+        performSegue(withIdentifier: "selectTaskSegue", sender: task)
+    }
+    
     // This function returns an array of type task.
     func makeTasks() -> [Task] {
         let task1 = Task()
@@ -64,17 +76,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return [task1, task2, task3]
     }
     
-    
+    // Segue performed when the plus button is tapped.
     @IBAction func plusTapped(_ sender: Any) {
         performSegue(withIdentifier: "addSegue", sender: nil)
     }
     
     // Function allows communication between the two View Controllers to work in the segue.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Assign nextVC to the CreateTaskViewController.
-        let nextVC = segue.destination as! CreateTaskViewController
-        // Give the previousVC a value of self so that both view controllers are now connected.
-        nextVC.previousVC = self
+        // This segue launches if we are adding a task.
+        if segue.identifier == "addSegue" {
+            // Assign nextVC to the CreateTaskViewController.
+            let nextVC = segue.destination as! CreateTaskViewController
+            // Give the previousVC a value of self so that both view controllers are now connected.
+            nextVC.previousVC = self
+        }
+        
+        // This segue launches if we are selecting an already added task.
+        if segue.identifier == "selectTaskSegue" {
+            let nextVC = segue.destination as! CompleteTaskViewController
+            nextVC.task = sender as! Task
+            nextVC.previousVC = self        }
     }
 }
 
