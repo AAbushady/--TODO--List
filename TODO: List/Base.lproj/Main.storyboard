@@ -10,16 +10,64 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Create Task View Controller-->
         <scene sceneID="rtq-du-qDD">
             <objects>
-                <viewController id="8RS-6E-zap" sceneMemberID="viewController">
+                <viewController id="8RS-6E-zap" customClass="CreateTaskViewController" customModule="TODO__List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vIm-NI-Nqi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIP-bo-tha">
+                                <rect key="frame" x="182" y="103" width="50" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6sR-kv-BCu">
+                                <rect key="frame" x="40" y="134" width="334" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osV-iE-gAN">
+                                <rect key="frame" x="167" y="194" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="atQ-4e-UFB">
+                                <rect key="frame" x="182.66666666666666" y="225" width="51" height="31"/>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyJ-TG-eTq">
+                                <rect key="frame" x="192" y="286" width="30" height="30"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addTapped:" destination="8RS-6E-zap" eventType="touchUpInside" id="RRZ-eM-OtH"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oyJ-TG-eTq" firstAttribute="top" secondItem="atQ-4e-UFB" secondAttribute="bottom" constant="30" id="1FP-Mr-5Bw"/>
+                            <constraint firstItem="osV-iE-gAN" firstAttribute="top" secondItem="6sR-kv-BCu" secondAttribute="bottom" constant="30" id="4w0-ZK-GFh"/>
+                            <constraint firstItem="6sR-kv-BCu" firstAttribute="top" secondItem="WIP-bo-tha" secondAttribute="bottom" constant="10" id="Fwo-KV-IwS"/>
+                            <constraint firstItem="6sR-kv-BCu" firstAttribute="centerX" secondItem="vIm-NI-Nqi" secondAttribute="centerX" id="Hgx-jl-h2G"/>
+                            <constraint firstItem="oyJ-TG-eTq" firstAttribute="centerX" secondItem="vIm-NI-Nqi" secondAttribute="centerX" id="KIS-uu-9dr"/>
+                            <constraint firstItem="Gie-nA-EUI" firstAttribute="trailing" secondItem="6sR-kv-BCu" secondAttribute="trailing" constant="40" id="P2n-Cm-SV6"/>
+                            <constraint firstItem="atQ-4e-UFB" firstAttribute="top" secondItem="osV-iE-gAN" secondAttribute="bottom" constant="10" id="dK2-Or-vEy"/>
+                            <constraint firstItem="atQ-4e-UFB" firstAttribute="centerX" secondItem="vIm-NI-Nqi" secondAttribute="centerX" id="iFy-6s-PFU"/>
+                            <constraint firstItem="osV-iE-gAN" firstAttribute="centerX" secondItem="vIm-NI-Nqi" secondAttribute="centerX" id="ixt-gS-v91"/>
+                            <constraint firstItem="WIP-bo-tha" firstAttribute="centerX" secondItem="vIm-NI-Nqi" secondAttribute="centerX" id="voG-1y-KBr"/>
+                            <constraint firstItem="6sR-kv-BCu" firstAttribute="leading" secondItem="Gie-nA-EUI" secondAttribute="leading" constant="40" id="vsf-A2-T8o"/>
+                            <constraint firstItem="WIP-bo-tha" firstAttribute="top" secondItem="Gie-nA-EUI" secondAttribute="top" constant="15" id="zER-fr-Gwi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Gie-nA-EUI"/>
                     </view>
+                    <connections>
+                        <outlet property="importantSwitch" destination="atQ-4e-UFB" id="fXI-ak-owP"/>
+                        <outlet property="taskNameTextField" destination="6sR-kv-BCu" id="rud-GH-mEN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oTZ-Bc-vLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
