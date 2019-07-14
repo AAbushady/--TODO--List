@@ -21,12 +21,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
-        
         // These make the tableview look at the view controller for what content and how many cells should be added.
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getTasks()
+    }
+    
+    
     // This function determines how many rows are in the table view.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Returning the count of tasks array allows for the task array to dictate how many rows there will be.
@@ -40,7 +44,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if task.important {
             // Set each cell to have its corresponding task name as the content.
             // The if statement will set the task to have an exclamation point if task.important = true.
-            cell.textLabel?.text = "\(String(describing: task.name))❗️"
+            cell.textLabel?.text = "\(task.name)❗️"
         } else {
             // Set each cell to have its corresponding task name as the content.
             cell.textLabel?.text = task.name
@@ -66,7 +70,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Takes entities from Core Data and places them into the tasks array.
     func getTasks() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        do {
+            tasks = try context.fetch(Task.fetchRequest()) as! [Task]
+            print(tasks)
+        } catch {
+            print("ERROR")
+        }
     }
     
     // Function allows communication between the two View Controllers to work in the segue.
