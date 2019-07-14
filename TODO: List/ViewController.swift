@@ -14,8 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Creates the empty array tasks of type Task.
     var tasks : [Task] = []
-    // Allows us to use the index to remove a task in the CompleteTaskViewController.
-    var selectedIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +26,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         getTasks()
+        tableView.reloadData()
     }
     
     
@@ -44,19 +43,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if task.important {
             // Set each cell to have its corresponding task name as the content.
             // The if statement will set the task to have an exclamation point if task.important = true.
-            cell.textLabel?.text = "\(task.name)❗️"
+            cell.textLabel?.text = "\(task.name!)❗️"
         } else {
             // Set each cell to have its corresponding task name as the content.
-            cell.textLabel?.text = task.name
+            cell.textLabel?.text = task.name!
         }
         return cell
     }
     
     // This function allows for functionality when a row is selected allowing for segue and for the app to be able to delete a task if it is completed.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // This variable is saved to be given to CompleteTaskViewController.
-        selectedIndex = indexPath.row
-        
         // Sends "Task Data" so that the proper task is segued too.
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "selectTaskSegue", sender: task)
@@ -85,8 +81,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // This segue launches if we are selecting an already added task.
         if segue.identifier == "selectTaskSegue" {
             let nextVC = segue.destination as! CompleteTaskViewController
-            nextVC.task = sender as! Task
-            nextVC.previousVC = self        }
+            nextVC.task = sender as? Task
+        }
     }
 }
 
