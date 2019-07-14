@@ -68,5 +68,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func plusTapped(_ sender: Any) {
         performSegue(withIdentifier: "addSegue", sender: nil)
     }
+    
+    // Function allows communication between the two View Controllers to work in the segue.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Assign nextVC to the CreateTaskViewController.
+        let nextVC = segue.destination as! CreateTaskViewController
+        // Give the previousVC a value of self so that both view controllers are now connected.
+        nextVC.previousVC = self
+    }
 }
 

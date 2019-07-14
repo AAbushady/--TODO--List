@@ -15,6 +15,8 @@ class CreateTaskViewController: UIViewController {
     // Outlet for the Important Switch.
     @IBOutlet weak var importantSwitch: UISwitch!
     
+    var previousVC = ViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +25,17 @@ class CreateTaskViewController: UIViewController {
     
     // Action function for button to add a Task.
     @IBAction func addTapped(_ sender: Any) {
+        // Create a Task from the outlet information.
+        let task = Task()
+        task.name = taskNameTextField.text!
+        task.important = importantSwitch.isOn
         
+        // Add a new task to the array in main View Controller.
+        previousVC.tasks.append(task)
+        // Reloads the table data source and delegate with the new information.
+        previousVC.tableView.reloadData()
+        
+        // Allows for returning to the main View Controller after adding a task.
+        navigationController!.popViewController(animated: true)
     }
 }
