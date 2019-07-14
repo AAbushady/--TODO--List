@@ -13,6 +13,7 @@ class CompleteTaskViewController: UIViewController {
     // Outlet to the taskLabel.
     @IBOutlet weak var taskLabel: UILabel!
     
+    // Set task of type Task to nil.
     var task : Task? = nil
     
     override func viewDidLoad() {
